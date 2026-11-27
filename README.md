@@ -1,16 +1,21 @@
 # Flicks in AdZen ads on Arena Group sites: concept demo
 
-Clickable concept of three Arena Group article pages (Parade, Men's Journal, PetHelpful) carrying AdZen's in-text ads: a short link in brackets after a keyword, marked "Ad". Hovering the link (or tapping it on a phone) opens a card with a live Flick, so the reader can switch between products before clicking through. Open "Explore Flicks" to jump to each site; picking a site again moves to its next ad.
+Clickable concept of three Arena Group article pages (Parade, Men's Journal, PetHelpful) carrying AdZen ads with live Flicks:
 
-- Parade, holiday hosting: West Elm, M&M'S, Ben & Jerry's, LEGO, Ulta Beauty
-- Men's Journal, winter gear: Patagonia, Nike, Levi's, Sony, YETI
-- PetHelpful, road trips with dogs: BarkBox, Ford, YETI, Lovesac
+- Text ads: a short link in brackets after a keyword, marked "Ad". Hovering the link (or tapping it on a phone) opens a card with the Flick.
+- Comment ads: a sponsored reply in the article's comments that answers the readers, with the Flick embedded.
+
+Open "Explore Flicks" to jump to each ad type; picking one again moves to the next ad.
+
+- Parade, holiday hosting: text ads for West Elm, M&M'S, Ben & Jerry's, LEGO, Ulta Beauty; comment ad for Coach
+- Men's Journal, winter gear: text ads for Patagonia, Nike, Levi's, Sony, YETI; comment ad for Bose
+- PetHelpful, road trips with dogs: text ads for Ford, YETI, Lovesac; comment ad for BarkBox
 
 The card has its own Shop button, so the Flicks' built-in buttons are hidden. Responsive for desktop and phones.
 
 Built by Flam for partner conversations. Not affiliated with or endorsed by The Arena Group, Parade, Men's Journal, PetHelpful, AdZen or the advertisers shown.
 
-Advertisers: West Elm, M&M'S, Ben & Jerry's, LEGO, Ulta Beauty, Patagonia, Nike, Levi's, Sony, YETI, BarkBox, Ford, Lovesac. Articles, authors and dates are invented. Photos via Unsplash.
+Advertisers: Coach, Bose, West Elm, M&M'S, Ben & Jerry's, LEGO, Ulta Beauty, Patagonia, Nike, Levi's, Sony, YETI, BarkBox, Ford, Lovesac. Articles, authors and dates are invented. Photos via Unsplash.
 
 ## Testing
 

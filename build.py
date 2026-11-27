@@ -11,7 +11,7 @@ HIDE = ('<script>(function(){var n=0;(function f(){var v=document.querySelector(
 B = {'westelm': ('West Elm', 'west-elm'), 'mms': ("M&M'S", 'mms'), 'benjerry': ("Ben & Jerry's", 'ben-and-jerrys'),
      'ulta': ('Ulta Beauty', 'ulta-beauty'), 'lego': ('LEGO', 'lego'), 'patagonia': ('Patagonia', 'patagonia'),
      'nike': ('Nike', 'nike'), 'levis': ("Levi's", 'levis'), 'sony': ('Sony', 'sony'), 'yeti': ('YETI', 'yeti'),
-     'barkbox': ('BarkBox', 'barkbox'), 'ford': ('Ford', 'ford'), 'lovesac': ('Lovesac', 'lovesac')}
+     'barkbox': ('BarkBox', 'barkbox'), 'ford': ('Ford', 'ford'), 'lovesac': ('Lovesac', 'lovesac'), 'coach': ('Coach', 'coach'), 'bose': ('Bose', 'bose')}
 br = {k: {'name': n, 'ar': 'square', 'bg': '#f2f2f2', 'tag': tag(sl) + '\n' + HIDE} for k, (n, sl) in B.items()}
 s = s.replace('/*BRANDS*/', json.dumps(br, ensure_ascii=False).replace('</', '<\\/'))
 open('index.html', 'w').write(s)

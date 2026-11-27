@@ -93,6 +93,24 @@ h1{font-family:var(--hfont);font-weight:var(--hweight);letter-spacing:var(--hspa
 .leave p{font-size:13px;color:#666;word-break:break-all;margin:0 0 14px}
 .leave button{width:100%;height:44px;border-radius:22px;font-weight:700}
 .leave .go{background:#1d1d1d;color:#fff}.leave .no{margin-top:8px;border:1.5px solid #ccc}
+.endc{padding-bottom:28px}
+.cmts{border-top:1px solid rgba(0,0,0,.1);padding:22px 0 150px}
+.cmts .ch{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.cmts .ch b{font-size:20px}.cmts .ch span{font-size:13px;color:#666}
+.cin{display:flex;gap:10px;align-items:center;border:1px solid rgba(0,0,0,.14);border-radius:12px;padding:12px;color:#888;font-size:15px;margin-bottom:8px}
+.cav{width:32px;height:32px;border-radius:50%;background:#e4e4e4;flex:none}
+.cm{display:flex;gap:10px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,.07)}
+.cm>img,.cm>.lg{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none}
+.cm>div{flex:1;min-width:0}
+.cm .cn{display:flex;gap:8px;align-items:center;font-size:14px}.cm .cn span{font-size:12.5px;color:#777}
+.cm p{margin:4px 0 8px;font-size:16px;line-height:1.5}
+.cm .cf{display:flex;gap:18px;font-size:13px;color:#666;font-weight:600}
+.cm.ad{background:color-mix(in srgb,var(--hero) 55%,#fff);border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:14px;margin:12px 0}
+.cm.ad .lg{display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;overflow:hidden;border:1px solid rgba(0,0,0,.06)}
+.cm.ad .lg img{width:100%;height:100%;object-fit:cover}
+.cm.ad .sp{font-size:12px;color:#666;border:1px solid #cfcfcf;border-radius:4px;padding:0 5px}
+.cm.ad .flick{width:100%;max-width:420px;aspect-ratio:1/1;border-radius:12px;background:#f2f2f2;overflow:hidden}
+.cm.ad a{display:inline-block;margin:10px 0 8px;font-size:15px;font-weight:700;color:var(--link);cursor:pointer;text-decoration:none}
 .fk-note{padding:8px 16px 6px;border-top:1px solid rgba(255,255,255,.14);margin-top:4px;font:500 11px var(--fk-font,system-ui);color:rgba(255,255,255,.6)}
 @media (min-width:760px){
   .hero{grid-template-columns:1fr 1.15fr;padding:20px;align-items:center}
@@ -144,11 +162,25 @@ const ADS={
  'mj-levis':{b:'levis',line:'Denim that takes the cold in stride',cta:'Shop'},
  'mj-sony':{b:'sony',line:'Noise canceling for the commute',cta:'Shop'},
  'mj-yeti':{b:'yeti',line:'Keeps coffee hot through first chair',cta:'Shop'},
- 'ph-barkbox':{b:'barkbox',line:'Toys and treats for the long drive',cta:'Shop'},
  'ph-ford':{b:'ford',line:'Room for the dog, the gear and the family',cta:'Explore'},
  'ph-yeti':{b:'yeti',line:'Cold water for both of you, all day',cta:'Shop'},
  'ph-lovesac':{b:'lovesac',line:'Washable covers for dog-friendly homes',cta:'Shop'}};
 Object.keys(ADS).forEach(k=>ADS[k].sub=ADV[ADS[k].b].dom);
+/* AdZen comment ads: a sponsored reply in the article's comments that answers the readers, with the Flick inside */
+const CADS={
+ 'pc-coach':{site:'parade',b:'coach',msg:'Hosting someone this year? A small leather piece is the host gift that gets used long after the leftovers are gone. Here are a few to start with.',link:'Shop host gifts at coach.com'},
+ 'mc-bose':{site:'mj',b:'bose',msg:'For loud trains and long flights, comfort matters as much as noise canceling. Here are the headphones our listeners wear all day.',link:'Compare headphones at bose.com'},
+ 'hc-barkbox':{site:'ph',b:'barkbox',msg:'Something new to chew on really helps nervous travelers. These are built for long drives and tough chewers.',link:'Shop toys and treats at barkbox.com'}};
+Object.keys(CADS).forEach(k=>ADS[k]={b:CADS[k].b,line:'',cta:'',sub:ADV[CADS[k].b].dom,cmt:1});
+const COMMENTS={
+ parade:[['Rachel P.','photo-1544005313-94ddf0286df2','2h','The night-before table tip saved me last year. Also stealing the dessert idea!',14],['Tom W.','photo-1506794778202-cad84cf45f1d','1h','Any good host gift ideas that aren\u2019t wine? My in-laws don\u2019t drink.',6]],
+ mj:[['Chris D.','photo-1519085360753-af0119f7cbe7','3h','Agree on the heavier denim. Wish I had switched years ago.',21],['Marcus L.','photo-1500648767791-00dcc994a43e','2h','What about headphones for flights? My commute is mostly planes.',9]],
+ ph:[['Nina K.','photo-1534528741775-53994a69daeb','5h','We did 9 hours to Tahoe with our lab last year. Stops every two hours made all the difference.',18],['Sam R.','photo-1580489944761-15a19d654956','3h','My rescue gets anxious in the car. Any tips for keeping her calm?',11]]};
+const cmtHTML=k=>{const L=COMMENTS[k],ca=Object.entries(CADS).find(([id,c])=>c.site===k);const [id,c]=ca;
+ return `<section class="cmts"><div class="ch"><b>${L.length+1} Comments</b><span>Sort by: Top</span></div>
+ <div class="cin"><span class="cav"></span><div>Join the conversation…</div></div>
+ ${L.map(x=>`<div class="cm"><img src="${U(x[1],80,80)}&crop=faces" alt=""><div><div class="cn"><b>${x[0]}</b><span>${x[2]}</span></div><p>${x[3]}</p><div class="cf"><span>♡ ${x[4]}</span><span>Reply</span></div></div></div>`).join('')}
+ <div class="cm ad" data-ca="${id}">${logo(c.b)}<div><div class="cn"><b>${ADV[c.b].name}</b><span class="sp">Sponsored</span></div><p>${c.msg}</p><div class="flick" data-slot="${id}" data-brand="${c.b}" data-cta="native"></div><a onclick="native('${id}')" data-t="${id}-link">${c.link} →</a><div class="cf"><span>♡ 3</span><span>Reply</span></div></div></div></section>`};
 const BR_OF=k=>ADS[k].b;
 /* article text: {{ad-id|link text}} becomes an AdZen in-text ad */
 const md=t=>t.replace(/\{\{([a-z-]+)\|([^}]+)\}\}/g,(m,id,txt)=>`<span class="az" data-ad="${id}">(<u>${txt}</u><sup>Ad</sup>)</span>`);
@@ -201,7 +233,7 @@ const SITES={
   body:[
    ['p',"For a lot of dogs, the holidays mean the longest car ride of the year. A little planning makes the trip easier on everyone, including the person driving."],
    ['h2','Pack a dog bag first'],
-   ['p',"Before you pack your own suitcase, fill a bag with food, medication, a leash, waste bags and a couple of new toys {{ph-barkbox|toys and treats from BarkBox}}. Something new to chew on goes a long way at hour three."],
+   ['p',"Before you pack your own suitcase, fill a bag with food, medication, a leash, waste bags and a couple of new toys. Something new to chew on goes a long way at hour three."],
    ['fig','photo-1544568100-847a948585b9','A tired dog is a calm passenger.'],
    ['h2','Give them a safe spot in the car'],
    ['p',"A crash-tested crate or harness and a flat cargo area make a huge difference on long drives {{ph-ford|Ford SUVs with room to spare}}. Lay down a familiar blanket so the space smells like home."],
@@ -222,10 +254,10 @@ function render(k){const s=SITES[k];
  <div class="cols"><aside class="rel"><h3>Related Articles</h3>${s.rel.map(r=>`<a><div style="flex:1"><small>${r[0]}</small><span>${r[1]}</span></div><img src="${U(r[2],200,160)}" alt="" loading="lazy"></a>`).join('')}</aside>
  <article class="art"><div class="topics">Follow Topics ${s.topics.map(t=>`<span class="chip">${t} +</span>`).join('')}</div>
  ${s.body.map(b=>b[0]==='p'?`<p>${md(b[1])}</p>`:b[0]==='h2'?`<h2>${b[1]}</h2>`:`<figure><img src="${U(b[1],1200,800)}" alt="" loading="lazy"><figcaption>${b[2]} Unsplash</figcaption></figure>`).join('')}
- <div class="endc"><img src="${U(s.author[2],120,120)}&crop=faces" alt=""><div><b>${s.author[0]}</b><br>${s.author[1]}, ${s.name}</div></div></article></div></div></section>`}
+ <div class="endc"><img src="${U(s.author[2],120,120)}&crop=faces" alt=""><div><b>${s.author[0]}</b><br>${s.author[1]}, ${s.name}</div></div>${cmtHTML(k)}</article></div></div></section>`}
 $('page').innerHTML=Object.keys(SITES).map(render).join('');
 const $app=$('app');
-$app.insertAdjacentHTML('beforeend',Object.entries(ADS).map(([id,t])=>`<div class="azpop" id="pop-${id}" hidden onmouseenter="taKeep()" onmouseleave="taLater()"><div class="h">${logo(t.b)}<b>${ADV[t.b].name}</b><span>Ad</span></div><div class="flick" data-slot="${id}" data-brand="${t.b}" data-cta="native"></div><div class="f"><div class="t">${t.line}<small>${t.sub}</small></div><button class="cta" data-t="${id}-cta" onclick="native('${id}')">${t.cta}</button></div></div>`).join(''));
+$app.insertAdjacentHTML('beforeend',Object.entries(ADS).filter(([id,t])=>!t.cmt).map(([id,t])=>`<div class="azpop" id="pop-${id}" hidden onmouseenter="taKeep()" onmouseleave="taLater()"><div class="h">${logo(t.b)}<b>${ADV[t.b].name}</b><span>Ad</span></div><div class="flick" data-slot="${id}" data-brand="${t.b}" data-cta="native"></div><div class="f"><div class="t">${t.line}<small>${t.sub}</small></div><button class="cta" data-t="${id}-cta" onclick="native('${id}')">${t.cta}</button></div></div>`).join(''));
 
 let site='parade';
 function showSite(k){if(k===site&&$('s-'+k).classList.contains('on'))return;site=k;taHide(true);document.querySelectorAll('.site').forEach(s=>s.classList.toggle('on',s.id==='s-'+k));$('page').scrollTop=0;document.title=SITES[k].name+': '+SITES[k].title;setTimeout(()=>FlicksKit.scan(),30)}
@@ -256,9 +288,10 @@ function goAd(id){const k=id.split('-')[0]==='pa'?'parade':id.split('-')[0];show
  const sc=$('page'),a=document.querySelector(`.az[data-ad="${id}"]`),c=sc.getBoundingClientRect(),r=a.getBoundingClientRect();
  sc.scrollTop=sc.scrollTop+(r.top-c.top)-Math.min(170,sc.clientHeight*.22);
  requestAnimationFrame(()=>{taShow(id);setTimeout(()=>{if(taGo===id)taGo=null},400)})}
-const CAT={parade:Object.keys(ADS).filter(k=>k.startsWith('pa-')),mj:Object.keys(ADS).filter(k=>k.startsWith('mj-')),ph:Object.keys(ADS).filter(k=>k.startsWith('ph-'))},CATI={};
+const CAT={text:Object.keys(ADS).filter(k=>!ADS[k].cmt),comment:Object.keys(CADS)},CATI={};
 function cycle(cat){const L=CAT[cat],i=CATI[cat]=((CATI[cat]??-1)+1)%L.length,id=L[i],fl=FlicksKit.flows.find(f=>f.id===cat);fl.slot=id;
  document.querySelectorAll(`[data-flow="${cat}"]`).forEach(e=>e.removeAttribute('data-flow'));
+ if(cat==='comment'){taHide(true);showSite(CADS[id].site);document.querySelector(`[data-ca="${id}"]`).setAttribute('data-flow',cat);return}
  document.querySelector(`.az[data-ad="${id}"]`).setAttribute('data-flow',cat);goAd(id)}
 
 /* links: the Flick's own click-out for the option on screen, otherwise the advertiser's product page */
@@ -279,9 +312,8 @@ function onCta(slot,url){const u=clean(url)||ADV[BR_OF(slot)].url;
 const BR=/*BRANDS*/;
 FlicksKit.init({root:'#app',maxLive:2,brands:BR,
  flows:[
-  {id:'parade',label:'Parade',slot:'pa-westelm',go(){cycle('parade')},settle:300},
-  {id:'mj',label:"Men's Journal",slot:'mj-patagonia',go(){cycle('mj')},settle:300},
-  {id:'ph',label:'PetHelpful',slot:'ph-barkbox',go(){cycle('ph')},settle:300}],
+  {id:'text',label:'AdZen text ads',slot:'pa-westelm',go(){cycle('text')},settle:300},
+  {id:'comment',label:'AdZen comment ads',slot:'pc-coach',go(){cycle('comment')}}],
  onCta(slot,url){onCta(slot,url)}});
 /* open on a Flick: the first ad in view opens as if hovered, until the reader does something */
 setTimeout(()=>{if(!taOpen&&$('page').scrollTop<40)goAd('pa-westelm')},900);
