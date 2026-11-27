@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Flicks in AdZen ads on Arena Group sites: concept demo</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231d1d1d'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='18' font-weight='700' fill='%23fff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,700;9..144,800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;background:#fff;color:#1d1d1d;font-family:Figtree,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+img{display:block;max-width:100%}
+#app{position:relative;height:100dvh;overflow:hidden;--fk-nav:0px;--fk-bg:rgba(29,29,29,.95);--fk-accent:#fff;--fk-font:Figtree,system-ui,sans-serif}
+.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.site{display:none}.site.on{display:block}
+/* site themes */
+.site{--promo:#eaa385;--promo-ink:#1d1d1d;--head:#fff;--head-ink:#1d1d1d;--sub:#0f1b2d;--sub-ink:#fff;--hero:#ead7f6;--chip:#fff;--link:#6b3fa0;--hfont:Fraunces,Georgia,serif;--hweight:800;--hcase:none;--hspace:-.01em;--h2size:30px}
+.site.mj{--promo:#120e0b;--promo-ink:#fff;--head:#120e0b;--head-ink:#fff;--sub:#d53216;--sub-ink:#fff;--hero:#eddec7;--link:#b5280f;--hfont:"Bebas Neue",Impact,"Arial Narrow",sans-serif;--hweight:400;--hspace:.01em;--h2size:36px}
+.site.ph{--promo:#0f6e63;--promo-ink:#fff;--head:#fff;--head-ink:#1d1d1d;--sub:#0f6e63;--sub-ink:#fff;--hero:#dff0ea;--link:#0c6b5f;--hfont:Figtree,sans-serif;--hweight:800;--hspace:-.015em;--h2size:28px}
+/* promo + header */
+.promo{display:flex;align-items:center;justify-content:center;gap:10px;height:34px;background:var(--promo);color:var(--promo-ink);font-size:13.5px;font-weight:500;padding:0 12px;white-space:nowrap;overflow:hidden}
+.promo b{background:#1d1d1d;color:#fff;border-radius:14px;padding:3px 10px;font-size:12.5px;font-weight:700}
+.mj .promo b{background:#fff;color:#120e0b}
+.ph .promo b{background:#fff;color:#0f6e63}
+.hdr{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;height:60px;padding:0 20px;background:var(--head);color:var(--head-ink);border-bottom:1px solid rgba(0,0,0,.08)}
+.mj .hdr{border-bottom:0}
+.wm{flex:1;display:flex;align-items:center;min-width:0}
+.wm .parade{font:800 22px/1 Fraunces,Georgia,serif;letter-spacing:-.02em}
+.wm .mjw{font:400 31px/1 "Bebas Neue",Impact,sans-serif;letter-spacing:.02em}
+.wm .phw{font:800 22px/1 Figtree,sans-serif;letter-spacing:-.03em;color:#0f6e63;display:flex;align-items:center;gap:6px}
+.navl{display:none;gap:22px;font-size:14px;font-weight:600}
+.subs{height:34px;padding:0 18px;border-radius:18px;background:var(--sub);color:var(--sub-ink);font-weight:700;font-size:14px}
+.mj .subs{font:400 16px/34px "Bebas Neue",sans-serif;letter-spacing:.04em}
+.burger{width:34px;height:34px;display:flex;align-items:center;justify-content:center}
+/* hero */
+.wrap{max-width:1240px;margin:0 auto;padding:0 16px}
+.hero{margin:16px 0 0;background:var(--hero);border-radius:14px;display:grid;gap:18px;padding:16px}
+.hero .im{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:4/3;background:#d9d2c5}
+.hero .im img{width:100%;height:100%;object-fit:cover}
+.hero .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 9px;font-size:11.5px;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.chip{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:12px;border:1px solid rgba(0,0,0,.18);background:var(--chip);font-size:12px;font-weight:600}
+.mj .chip{font:400 14px/22px "Bebas Neue",sans-serif;letter-spacing:.04em}
+h1{font-family:var(--hfont);font-weight:var(--hweight);letter-spacing:var(--hspace);text-transform:var(--hcase);font-size:32px;line-height:1.06;margin:12px 0 10px}
+.mj h1{font-size:44px;line-height:.98}
+.dek{font-size:18px;line-height:1.38;margin:0 0 12px}
+.date{font-size:13px;font-weight:600;margin-bottom:12px}
+.by{display:flex;align-items:center;gap:10px;font-size:13px}
+.by img{width:34px;height:34px;border-radius:50%;object-fit:cover}
+.by b{text-decoration:underline;text-underline-offset:2px}
+.by small{display:block;font-size:12px;color:#555}
+.follow{margin-left:8px;height:32px;padding:0 14px;border-radius:16px;border:1.5px solid rgba(0,0,0,.25);font-size:13px;font-weight:600}
+/* body */
+.cols{display:grid;gap:32px;margin-top:26px}
+.rel{display:none}
+.rel h3{font:700 20px/1.2 Figtree,sans-serif;margin:0 0 14px}
+.rel a{display:flex;gap:10px;padding:12px 0;border-top:1px solid rgba(0,0,0,.08);color:inherit;text-decoration:none}
+.rel a span{font-size:15px;font-weight:700;line-height:1.25;flex:1}
+.rel a small{display:block;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px;color:#555}
+.rel a img{width:78px;height:62px;border-radius:8px;object-fit:cover;flex:none}
+.art{max-width:700px;width:100%;margin:0 auto 0 0}
+.topics{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;margin-bottom:18px}
+.art p{font-size:18.5px;line-height:1.6;margin:0 0 20px}
+.art h2{font-family:var(--hfont);font-weight:var(--hweight);font-size:var(--h2size);line-height:1.1;margin:34px 0 12px;letter-spacing:var(--hspace)}
+.art figure{margin:6px 0 24px}
+.art figure img{width:100%;border-radius:10px;aspect-ratio:3/2;object-fit:cover;background:#eee}
+.art figcaption{font-size:12.5px;color:#666;margin-top:6px}
+.art a.il{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.endc{display:flex;gap:12px;align-items:center;border-top:1px solid rgba(0,0,0,.1);padding:18px 0 140px;font-size:14px;color:#444}
+.endc img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+/* AdZen in-text ads */
+.az{white-space:normal}
+.az u{text-decoration:none;color:var(--link);font-weight:600;border-bottom:1.5px dotted currentColor;cursor:pointer;padding-bottom:1px}
+.az sup{display:inline-block;vertical-align:2px;margin-left:5px;padding:0 4px;border:1px solid #c2c2c2;border-radius:4px;font:700 10px/15px Figtree,system-ui,sans-serif;color:#6c6c6c;letter-spacing:.02em}
+.az.on u{background:color-mix(in srgb,var(--link) 12%,transparent);border-bottom-style:solid}
+.azpop{position:absolute;z-index:58;width:320px;max-width:calc(100% - 24px);background:#fff;border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.24),0 0 0 1px rgba(0,0,0,.06);overflow:hidden;opacity:0;transform:translateY(4px);transition:opacity .16s,transform .16s;font-family:Figtree,system-ui,sans-serif}
+.azpop.on{opacity:1;transform:none}
+.azpop[hidden]{display:none}
+.azpop .h{display:flex;align-items:center;gap:9px;padding:10px 12px}
+.azpop .lg{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff;overflow:hidden;flex:none;border:1px solid rgba(0,0,0,.06)}
+.azpop .lg img{width:100%;height:100%;object-fit:cover}
+.azpop .h b{flex:1;font-size:14px}
+.azpop .h span{font-size:11px;font-weight:700;color:#777;border:1px solid #d0d0d0;border-radius:4px;padding:0 4px;line-height:15px}
+.azpop .flick{width:100%;aspect-ratio:1/1;background:#f2f2f2}
+.azpop .f{display:flex;align-items:center;gap:10px;padding:11px 12px 13px}
+.azpop .f .t{flex:1;min-width:0;font-size:13.5px;line-height:1.3;font-weight:700}
+.azpop .f .t small{display:block;font-weight:500;color:#777;font-size:12px;margin-top:2px}
+.azpop .cta{flex:none;height:34px;padding:0 15px;border-radius:17px;background:#1d1d1d;color:#fff;font-size:13.5px;font-weight:700;white-space:nowrap}
+.leave{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:70;width:min(340px,calc(100% - 32px));background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.3);padding:20px;text-align:center}
+.leave[hidden]{display:none}
+.leave b{display:block;font-size:17px;margin-bottom:6px}
+.leave p{font-size:13px;color:#666;word-break:break-all;margin:0 0 14px}
+.leave button{width:100%;height:44px;border-radius:22px;font-weight:700}
+.leave .go{background:#1d1d1d;color:#fff}.leave .no{margin-top:8px;border:1.5px solid #ccc}
+.fk-note{padding:8px 16px 6px;border-top:1px solid rgba(255,255,255,.14);margin-top:4px;font:500 11px var(--fk-font,system-ui);color:rgba(255,255,255,.6)}
+@media (min-width:760px){
+  .hero{grid-template-columns:1fr 1.15fr;padding:20px;align-items:center}
+  h1{font-size:40px}.mj h1{font-size:56px}
+  .navl{display:flex}
+}
+@media (min-width:1080px){
+  .cols{grid-template-columns:270px 1fr}
+  .rel{display:block}
+  .wrap{padding:0 24px}
+}
+</style>
+</head>
+<body>
+<div id="app"><div class="page" id="page"></div>
+<div class="leave" id="leave" hidden></div></div>
+<script>
+/*KIT*/
+</script>
+<script>
+const $=id=>document.getElementById(id);
+const U=(s,w=900,h)=>`https://images.unsplash.com/${s}?w=${w}${h?'&h='+h:''}&fit=crop&auto=format&q=70`;
+const ADV={
+ westelm:{name:'West Elm',dom:'westelm.com',col:'#222',ini:'WE',url:'https://www.westelm.com/shop/dining-kitchen/'},
+ mms:{name:"M&M'S",dom:'mms.com',col:'#a3201b',ini:'M',url:'https://www.mms.com/en-us/'},
+ benjerry:{name:"Ben & Jerry's",dom:'benjerry.com',col:'#1d5aa6',ini:'BJ',url:'https://www.benjerry.com/flavors'},
+ ulta:{name:'Ulta Beauty',dom:'ulta.com',col:'#f37021',ini:'U',url:'https://www.ulta.com/promotion/gift'},
+ lego:{name:'LEGO',dom:'lego.com',col:'#d01012',ini:'L',url:'https://www.lego.com/en-us/categories/new-sets-and-products'},
+ coach:{name:'Coach',dom:'coach.com',col:'#111',ini:'C',url:'https://www.coach.com/shop/women/handbags'},
+ patagonia:{name:'Patagonia',dom:'patagonia.com',col:'#1f2a44',ini:'P',url:'https://www.patagonia.com/shop/mens/jackets-vests'},
+ nike:{name:'Nike',dom:'nike.com',col:'#111',ini:'N',url:'https://www.nike.com/w/mens-running-shoes-37v7jznik1zy7ok'},
+ levis:{name:"Levi's",dom:'levi.com',col:'#c41230',ini:'L',url:'https://www.levi.com/US/en_US/clothing/men/jeans/c/levi_clothing_men_jeans'},
+ sony:{name:'Sony',dom:'sony.com',col:'#111',ini:'S',url:'https://electronics.sony.com/audio/headphones/c/headphones'},
+ bose:{name:'Bose',dom:'bose.com',col:'#111',ini:'B',url:'https://www.bose.com/c/headphones'},
+ yeti:{name:'YETI',dom:'yeti.com',col:'#1f2a36',ini:'Y',url:'https://www.yeti.com/drinkware.html'},
+ barkbox:{name:'BarkBox',dom:'barkbox.com',col:'#0a7bc4',ini:'B',url:'https://www.barkbox.com/'},
+ ford:{name:'Ford',dom:'ford.com',col:'#00095b',ini:'F',url:'https://www.ford.com/suvs/'},
+ lovesac:{name:'Lovesac',dom:'lovesac.com',col:'#111',ini:'L',url:'https://www.lovesac.com/sactionals'}};
+const logo=k=>{const a=ADV[k];return `<span class="lg" style="background:${a.col}"><img src="https://www.google.com/s2/favicons?domain=${a.dom}&sz=128" alt="" onerror="this.remove()" onload="if(this.naturalWidth<40)this.remove()">${a.ini}</span>`};
+/* AdZen in-text ads: link text after a keyword, a Flick on hover (tap on touch) */
+const ADS={
+ 'pa-westelm':{b:'westelm',line:'Serveware and linens for a full table',cta:'Shop'},
+ 'pa-mms':{b:'mms',line:'Holiday colors for the candy bowl',cta:'Shop'},
+ 'pa-benjerry':{b:'benjerry',line:'Pick the pints for dessert',cta:'Find pints'},
+ 'pa-lego':{b:'lego',line:'Sets that keep kids busy for hours',cta:'Shop'},
+ 'pa-ulta':{b:'ulta',line:'Gift sets the host will actually use',cta:'Shop'},
+ 'mj-patagonia':{b:'patagonia',line:'Insulated layers built for real cold',cta:'Shop'},
+ 'mj-nike':{b:'nike',line:'Running shoes with grip for wet miles',cta:'Shop'},
+ 'mj-levis':{b:'levis',line:'Denim that takes the cold in stride',cta:'Shop'},
+ 'mj-sony':{b:'sony',line:'Noise canceling for the commute',cta:'Shop'},
+ 'mj-yeti':{b:'yeti',line:'Keeps coffee hot through first chair',cta:'Shop'},
+ 'ph-barkbox':{b:'barkbox',line:'Toys and treats for the long drive',cta:'Shop'},
+ 'ph-ford':{b:'ford',line:'Room for the dog, the gear and the family',cta:'Explore'},
+ 'ph-yeti':{b:'yeti',line:'Cold water for both of you, all day',cta:'Shop'},
+ 'ph-lovesac':{b:'lovesac',line:'Washable covers for dog-friendly homes',cta:'Shop'}};
+Object.keys(ADS).forEach(k=>ADS[k].sub=ADV[ADS[k].b].dom);
+const BR_OF=k=>ADS[k].b;
+/* article text: {{ad-id|link text}} becomes an AdZen in-text ad */
+const md=t=>t.replace(/\{\{([a-z-]+)\|([^}]+)\}\}/g,(m,id,txt)=>`<span class="az" data-ad="${id}">(<u>${txt}</u><sup>Ad</sup>)</span>`);
+const SITES={
+ parade:{cls:'',name:'Parade',wm:'<span class="parade">Parade</span>',promo:'<b>Holiday Hosting</b>Recipes, decor and gifts for the season',nav:['Food','Holidays','Shopping','Entertainment'],
+  chip:'Holidays',title:"How to Host the Holidays Without Losing Your Mind: 18 Ideas From Pro Entertainers",
+  dek:'From the table to the dessert spread to the kids’ corner, here is how seasoned hosts keep it calm, warm and actually fun.',
+  date:'Nov 26, 2026 9:00 AM EST',author:['Megan Hale','Lifestyle Editor','photo-1494790108377-be9c29b29330'],hero:['photo-1512389142860-9c449e58a543','Holiday decor'],
+  topics:['Holidays','Entertaining','Food'],
+  body:[
+   ['p',"The best holiday hosts we know have one thing in common: they decide early what matters and let the rest go. A gorgeous table? Worth it. A seven-course menu? Probably not."],
+   ['h2','1. Set the table the night before'],
+   ['p',"Pros swear by laying out plates, glasses and linens a day early {{pa-westelm|table linens and serveware from West Elm}}, so the morning of is about the food, not hunting for the gravy boat."],
+   ['fig','photo-1606787366850-de6330128bfc','Build a grazing board everyone can pick at while the main event cooks.'],
+   ['p',"A big grazing board buys you an hour. Mix something salty, something sweet and something green, and keep a bowl of candy {{pa-mms|holiday M&M'S colors}} within reach of the kids."],
+   ['h2','2. Make dessert the easy course'],
+   ['p',"Nobody remembers whether the pie crust was homemade. Pair one great pie with a few pints {{pa-benjerry|Ben & Jerry's flavors for the table}} and let guests build their own plates."],
+   ['h2','3. Give the kids a project'],
+   ['p',"Set up a corner with a building set and a stack of paper {{pa-lego|new LEGO sets for ages 6 and up}}. It keeps little hands busy while the grown-ups finish cooking."],
+   ['fig','photo-1556909114-f6e7ad7d3136','Cooking together turns prep into part of the party.'],
+   ['h2','4. Bring a host gift that feels personal'],
+   ['p',"If you are the guest this year, skip the scented candle. A small beauty set {{pa-ulta|gift sets from Ulta Beauty}} or a favorite bottle with a handwritten note goes much further."],
+   ['p',"And whatever happens with the turkey, remember: the people around the table are what everyone will remember."]],
+  rel:[['Food','The Only Make-Ahead Mashed Potatoes You Need','photo-1513297887119-d46091b24bfa'],['Holidays','27 Cozy Christmas Decor Ideas for Small Spaces','photo-1543589077-47d81606c1bf'],['Shopping','Gifts Under $50 Everyone Will Love','photo-1482517967863-00e15c9b44be']]},
+ mj:{cls:'mj',name:"Men's Journal",wm:'<span class="mjw">MEN’S JOURNAL</span>',promo:'<b>Gear Guide</b>The best winter gear, tested',nav:['Gear','Adventure','Fitness','Style'],
+  chip:'Gear',title:'The Best Winter Gear of 2026, Tested by Our Editors',
+  dek:'We took jackets, shoes and gadgets through a month of cold mornings, ski days and wet commutes. These are the pieces we kept reaching for.',
+  date:'Nov 25, 2026 7:30 AM EST',author:['Jake Morrow','Senior Gear Editor','photo-1507003211169-0a1dd7228f2d'],hero:['photo-1483721310020-03333e577078','Winter in the mountains'],
+  topics:['Gear','Outdoors','Winter'],
+  body:[
+   ['p',"Winter gear has to do two jobs: keep you warm when you are standing still and stay comfortable when you start moving. Everything on this list did both."],
+   ['h2','Best insulated jacket'],
+   ['p',"Our top pick packs down small and still held up on a 12-degree morning at the trailhead {{mj-patagonia|Patagonia insulated jackets}}. It is quiet, light and easy to layer under a shell."],
+   ['fig','photo-1551698618-1dfe5d97d256','Layering matters more than any single piece.'],
+   ['h2','Best shoes for cold, wet runs'],
+   ['p',"Grip is everything once the sidewalks get slick. Our testers logged 80 miles in the rain and slush {{mj-nike|Nike running shoes for winter}} and the outsole never let go."],
+   ['h2','Best everyday denim'],
+   ['p',"A heavier-weight jean is the most underrated winter upgrade {{mj-levis|Levi's men's jeans}}. It blocks wind on the walk to work and looks better with every wash."],
+   ['fig','photo-1505740420928-5e560c06d30e','Noise canceling turns a loud commute into an hour of quiet.'],
+   ['h2','Best headphones for the commute'],
+   ['p',"On crowded trains, strong noise canceling is the difference between arriving drained and arriving rested {{mj-sony|Sony noise canceling headphones}}. Battery life easily covered a full week of commuting."],
+   ['h2','Best mug for early starts'],
+   ['p',"If you are first in line for the lift, bring coffee that stays hot until the top {{mj-yeti|YETI drinkware}}. Ours was still steaming three runs later."]],
+  rel:[['Fitness','The 20-Minute Workout Our Editors Do Every Morning','photo-1508341591423-4347099e1f19'],['Adventure','The Best Ski Towns to Visit This Winter','photo-1491555103944-7c647fd857e6'],['Style','How to Layer for Cold Weather Without Looking Bulky','photo-1520975954732-35dd22299614']]},
+ ph:{cls:'ph',name:'PetHelpful',wm:'<span class="phw"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0f6e63"><circle cx="6" cy="9" r="2.2"/><circle cx="10" cy="5.5" r="2.2"/><circle cx="14" cy="5.5" r="2.2"/><circle cx="18" cy="9" r="2.2"/><path d="M12 11c-3 0-6 3.6-6 6.2 0 1.8 1.4 2.8 3 2.8 1.2 0 2-.6 3-.6s1.8.6 3 .6c1.6 0 3-1 3-2.8 0-2.6-3-6.2-6-6.2z"/></svg>PetHelpful</span>',promo:'<b>Holiday Travel</b>Tips for traveling with pets',nav:['Dogs','Cats','Training','Health'],
+  chip:'Dogs',title:'How to Road-Trip With Your Dog This Holiday Season',
+  dek:'Long drives, new places and lots of relatives. Here is how to keep your dog calm, comfortable and happy from the driveway to grandma’s door.',
+  date:'Nov 24, 2026 11:15 AM EST',author:['Dana Whitfield','Certified Trainer and Contributor','photo-1438761681033-6461ffad8d80'],hero:['photo-1477884213360-7e9d7dcc1e48','A happy dog on the beach'],
+  topics:['Dogs','Travel','Holidays'],
+  body:[
+   ['p',"For a lot of dogs, the holidays mean the longest car ride of the year. A little planning makes the trip easier on everyone, including the person driving."],
+   ['h2','Pack a dog bag first'],
+   ['p',"Before you pack your own suitcase, fill a bag with food, medication, a leash, waste bags and a couple of new toys {{ph-barkbox|toys and treats from BarkBox}}. Something new to chew on goes a long way at hour three."],
+   ['fig','photo-1544568100-847a948585b9','A tired dog is a calm passenger.'],
+   ['h2','Give them a safe spot in the car'],
+   ['p',"A crash-tested crate or harness and a flat cargo area make a huge difference on long drives {{ph-ford|Ford SUVs with room to spare}}. Lay down a familiar blanket so the space smells like home."],
+   ['h2','Stop every two to three hours'],
+   ['p',"Plan stops for a short walk, a bathroom break and fresh water {{ph-yeti|YETI bottles and dog bowls}}. Dogs dehydrate faster in a warm car than most people expect."],
+   ['fig','photo-1548199973-03cce0bbc87b','Short walks at every stop help dogs settle back into the ride.'],
+   ['h2','Bring a little of home with you'],
+   ['p',"At your destination, set up a quiet corner with their bed and blanket. And if muddy paws are a worry once you are back home, washable furniture {{ph-lovesac|Lovesac Sactionals with washable covers}} takes the stress out of it."],
+   ['p',"Most of all, stay patient. New places are exciting, and a calm owner makes for a calm dog."]],
+  rel:[['Dogs','10 Signs Your Dog Is Bored, and What to Do About It','photo-1530281700549-e82e7bf110d6'],['Training','How to Teach a Puppy to Settle in a Crate','photo-1415369629372-26f2fe60c467'],['Health','Winter Paw Care: A Vet’s Checklist','photo-1601758228041-f3b2795255f1']]}};
+const icon={menu:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7h12M3 12h9M3 17h12"/><circle cx="17.5" cy="13.5" r="3.2"/><path d="m20 16 2 2"/></svg>'};
+function render(k){const s=SITES[k];
+ return `<section class="site ${s.cls}" id="s-${k}"><div class="promo">${s.promo}</div>
+ <header class="hdr"><div class="wm">${s.wm}</div><nav class="navl">${s.nav.map(n=>`<span>${n}</span>`).join('')}</nav><button class="subs">Subscribe</button><button class="burger" aria-label="Menu and search">${icon.menu}</button></header>
+ <div class="wrap"><div class="hero"><div class="im"><img src="${U(s.hero[0],1100,825)}" alt="${s.hero[1]}"><div class="cap">${s.hero[1]} · Unsplash</div></div>
+ <div><span class="chip">${s.chip}</span><h1>${s.title}</h1><p class="dek">${s.dek}</p><div class="date">${s.date}</div>
+ <div class="by"><img src="${U(s.author[2],120,120)}&crop=faces" alt=""><div>By <b>${s.author[0]}</b><small>${s.author[1]}</small></div><button class="follow">Follow +</button></div></div></div>
+ <div class="cols"><aside class="rel"><h3>Related Articles</h3>${s.rel.map(r=>`<a><div style="flex:1"><small>${r[0]}</small><span>${r[1]}</span></div><img src="${U(r[2],200,160)}" alt="" loading="lazy"></a>`).join('')}</aside>
+ <article class="art"><div class="topics">Follow Topics ${s.topics.map(t=>`<span class="chip">${t} +</span>`).join('')}</div>
+ ${s.body.map(b=>b[0]==='p'?`<p>${md(b[1])}</p>`:b[0]==='h2'?`<h2>${b[1]}</h2>`:`<figure><img src="${U(b[1],1200,800)}" alt="" loading="lazy"><figcaption>${b[2]} Unsplash</figcaption></figure>`).join('')}
+ <div class="endc"><img src="${U(s.author[2],120,120)}&crop=faces" alt=""><div><b>${s.author[0]}</b><br>${s.author[1]}, ${s.name}</div></div></article></div></div></section>`}
+$('page').innerHTML=Object.keys(SITES).map(render).join('');
+const $app=$('app');
+$app.insertAdjacentHTML('beforeend',Object.entries(ADS).map(([id,t])=>`<div class="azpop" id="pop-${id}" hidden onmouseenter="taKeep()" onmouseleave="taLater()"><div class="h">${logo(t.b)}<b>${ADV[t.b].name}</b><span>Ad</span></div><div class="flick" data-slot="${id}" data-brand="${t.b}" data-cta="native"></div><div class="f"><div class="t">${t.line}<small>${t.sub}</small></div><button class="cta" data-t="${id}-cta" onclick="native('${id}')">${t.cta}</button></div></div>`).join(''));
+
+let site='parade';
+function showSite(k){if(k===site&&$('s-'+k).classList.contains('on'))return;site=k;taHide(true);document.querySelectorAll('.site').forEach(s=>s.classList.toggle('on',s.id==='s-'+k));$('page').scrollTop=0;document.title=SITES[k].name+': '+SITES[k].title;setTimeout(()=>FlicksKit.scan(),30)}
+document.querySelectorAll('.site').forEach(s=>s.classList.toggle('on',s.id==='s-parade'));
+
+/* popovers */
+let taOpen=null,taT=null,taGo=null;
+function taPlace(id){const a=document.querySelector(`.az[data-ad="${id}"]`),p=$('pop-'+id);if(!a||!p)return;
+ const ar=$app.getBoundingClientRect(),rs=[...a.getClientRects()],r=rs[rs.length-1]||a.getBoundingClientRect(),W=$app.clientWidth,H=$app.clientHeight,ph=p.offsetHeight||420,pw=p.offsetWidth;
+ const hdr=document.querySelector('.site.on .hdr').getBoundingClientRect().bottom-ar.top;
+ p.style.left=Math.min(Math.max(12,r.left-ar.left-40),W-pw-12)+'px';
+ const below=r.bottom-ar.top+8,above=r.top-ar.top-ph-8;
+ p.style.top=(below+ph<=H-8?below:above>=hdr+6?above:Math.max(hdr+6,Math.min(below,H-ph-8)))+'px'}
+function taShow(id){if(taOpen&&taOpen!==id)taHide(true);clearTimeout(taT);taOpen=id;const p=$('pop-'+id);p.hidden=false;
+ document.querySelector(`.az[data-ad="${id}"]`).classList.add('on');taPlace(id);requestAnimationFrame(()=>{taPlace(id);p.classList.add('on')});FlicksKit.scan()}
+function taHide(now){const id=taOpen;if(!id)return;const p=$('pop-'+id);p.classList.remove('on');const a=document.querySelector(`.az[data-ad="${id}"]`);a&&a.classList.remove('on');taOpen=null;if(now)p.hidden=true;else setTimeout(()=>{if(taOpen!==id)p.hidden=true},170)}
+function taKeep(){clearTimeout(taT)}
+function taLater(){clearTimeout(taT);taT=setTimeout(()=>taHide(),320)}
+const HOVER=matchMedia('(hover:hover) and (pointer:fine)').matches;
+document.querySelectorAll('.az').forEach(a=>{const id=a.dataset.ad;
+ if(HOVER){a.addEventListener('mouseenter',()=>{clearTimeout(taT);taT=setTimeout(()=>taShow(id),120)});a.addEventListener('mouseleave',taLater)}
+ a.addEventListener('click',e=>{e.stopPropagation();taOpen===id?taHide():taShow(id)})});
+document.addEventListener('pointerdown',e=>{if(taOpen&&!e.target.closest('.azpop')&&!e.target.closest('.az')&&!e.target.closest('[data-flicks-button]')&&!e.target.closest('.fk-menu'))taHide()},true);
+$('page').addEventListener('scroll',()=>{if(taOpen&&!taGo)taHide(true)},{passive:true});
+addEventListener('resize',()=>{if(taOpen)taPlace(taOpen)});
+/* From Explore Flicks: bring the paragraph into view, then open the ad as if hovered */
+function goAd(id){const k=id.split('-')[0]==='pa'?'parade':id.split('-')[0];showSite(k);taHide(true);taGo=id;
+ const sc=$('page'),a=document.querySelector(`.az[data-ad="${id}"]`),c=sc.getBoundingClientRect(),r=a.getBoundingClientRect();
+ sc.scrollTop=sc.scrollTop+(r.top-c.top)-Math.min(170,sc.clientHeight*.22);
+ requestAnimationFrame(()=>{taShow(id);setTimeout(()=>{if(taGo===id)taGo=null},400)})}
+const CAT={parade:Object.keys(ADS).filter(k=>k.startsWith('pa-')),mj:Object.keys(ADS).filter(k=>k.startsWith('mj-')),ph:Object.keys(ADS).filter(k=>k.startsWith('ph-'))},CATI={};
+function cycle(cat){const L=CAT[cat],i=CATI[cat]=((CATI[cat]??-1)+1)%L.length,id=L[i],fl=FlicksKit.flows.find(f=>f.id===cat);fl.slot=id;
+ document.querySelectorAll(`[data-flow="${cat}"]`).forEach(e=>e.removeAttribute('data-flow'));
+ document.querySelector(`.az[data-ad="${id}"]`).setAttribute('data-flow',cat);goAd(id)}
+
+/* links: the Flick's own click-out for the option on screen, otherwise the advertiser's product page */
+const clean=u=>{u=String(u||'').replace(/\$\{[^}]*\}/g,'');const i=u.search(/https?:\/\//);if(i<0)return '';u=u.slice(i);try{if(new URL(u).pathname.length<2)return ''}catch(e){return ''}return u};
+let pend=null;
+function openUrl(u){const w=window.open(u,'_blank');if(w){try{w.opener=null}catch(e){}return}leave(u)}
+function leave(u){const L=$('leave');L.innerHTML=`<b>Continue to ${new URL(u).hostname.replace(/^www\./,'')}</b><p>${u}</p><button class="go" onclick="window.open('${u}','_blank');$('leave').hidden=true">Open</button><button class="no" onclick="$('leave').hidden=true">Stay here</button>`;L.hidden=false}
+function native(slot){const fb=ADV[BR_OF(slot)].url,s=FlicksKit.slots[slot];
+ if(!s||!s.ready||FlicksKit.stub){openUrl(fb);return}
+ const w=window.open('about:blank','_blank');
+ if(!w){pend={slot,w:null};FlicksKit.pressCta(slot);setTimeout(()=>{if(pend&&pend.slot===slot){pend=null;leave(fb)}},900);return}
+ try{w.opener=null}catch(e){}pend={slot,w};FlicksKit.pressCta(slot);
+ setTimeout(()=>{if(pend&&pend.slot===slot){try{w.location.href=fb}catch(e){}pend=null}},900)}
+function onCta(slot,url){const u=clean(url)||ADV[BR_OF(slot)].url;
+ if(pend&&pend.slot===slot){const p=pend;pend=null;if(p.w){try{p.w.location.href=u}catch(e){}}else leave(u);return}openUrl(u)}
+
+/* Flicks */
+const BR=/*BRANDS*/;
+FlicksKit.init({root:'#app',maxLive:2,brands:BR,
+ flows:[
+  {id:'parade',label:'Parade',slot:'pa-westelm',go(){cycle('parade')},settle:300},
+  {id:'mj',label:"Men's Journal",slot:'mj-patagonia',go(){cycle('mj')},settle:300},
+  {id:'ph',label:'PetHelpful',slot:'ph-barkbox',go(){cycle('ph')},settle:300}],
+ onCta(slot,url){onCta(slot,url)}});
+document.querySelector('.fk-menu').insertAdjacentHTML('beforeend','<div class="fk-note">Concept by Flam · AdZen in-text ads</div>');
+/* open on a Flick: the first ad in view opens as if hovered, until the reader does something */
+setTimeout(()=>{if(!taOpen&&$('page').scrollTop<40)goAd('pa-westelm')},900);
+</script>
+</body></html>
