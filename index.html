@@ -397,7 +397,6 @@ FlicksKit.init({root:'#app',maxLive:2,brands:BR,
   {id:'mj',label:"Men's Journal",slot:'mj-patagonia',go(){cycle('mj')},settle:300},
   {id:'ph',label:'PetHelpful',slot:'ph-barkbox',go(){cycle('ph')},settle:300}],
  onCta(slot,url){onCta(slot,url)}});
-document.querySelector('.fk-menu').insertAdjacentHTML('beforeend','<div class="fk-note">Concept by Flam · AdZen in-text ads</div>');
 /* open on a Flick: the first ad in view opens as if hovered, until the reader does something */
 setTimeout(()=>{if(!taOpen&&$('page').scrollTop<40)goAd('pa-westelm')},900);
 </script>
